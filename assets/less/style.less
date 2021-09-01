@@ -1,0 +1,98 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+body {
+    font-family: 'Press Start 2P', cursive;
+}
+
+main {
+    background: url("https://ik.imagekit.io/1cqtok8fv7n/space_impact/bg_EKXHfFH7LG.png?updatedAt=1630464133237");
+    border-radius: 24px;
+    height: 90vh;
+    margin: 32px auto;
+    width: 1024px;
+
+    #hero,
+    #hero_laser,
+    #hero_life,
+    #enemy_drone,
+    #enemy_bumblebee,
+    #boss_enemy_poseidon,
+    #boss_enemy_valkyrie,
+    #boss_enemy_doppelganger {
+        background: url("https://ik.imagekit.io/1cqtok8fv7n/space_impact/sprite_QymC4kX-Y.png?updatedAt=1630480113523");
+        position: absolute;
+    }
+
+    #hero {
+        background-position: -80px -57px;
+        height: 56px;
+        width: 37px;
+    }
+
+    .hero_respawned {
+        border-radius: 8px;
+        border: 4px solid #33b5ee;
+        box-shadow: 0px 0px 8px 0px rgba(51,181,238,0.8);
+        margin: 2px;
+        -moz-box-shadow: 0px 0px 8px 0px rgba(51,181,238,0.8);
+        -webkit-box-shadow: 0px 0px 8px 0px rgba(51,181,238,0.8);
+    }
+    
+    #hero_laser {
+        background-position: -50px -430px;
+        height: 4px;
+        width: 28px;
+    }
+
+    #hero_life {
+        background-position: -80px -57px;
+        height: 56px;
+        transform: rotate(-90deg);
+        width: 37px;
+    }
+
+    h2 {
+        bottom: 41px;
+        color: white;
+        left: 486px;
+        letter-spacing: 2px;
+        position: absolute;
+    }
+
+    #enemy_drone {
+        background-position: -468px -223px;
+        height: 46px;
+        width: 45px;
+    }
+
+    #enemy_bumblebee {
+        background-position: -85px -305px;
+        height: 24px;
+        width: 37px;
+    }
+
+    #boss_enemy_poseidon,
+    #boss_enemy_valkyrie,
+    #boss_enemy_doppelganger {
+        transform: scale(2);
+    }
+
+    #boss_enemy_poseidon {
+        background-position: -64px -212px;
+        height: 48px;
+        width: 42px;
+    }
+
+    #boss_enemy_valkyrie {
+        background-position: -181px -113px;
+        height: 51px;
+        width: 42px;
+    }
+
+    #boss_enemy_doppelganger {
+        background-position: -169px -61px;
+        height: 51px;
+        width: 42px;
+    }
+}
+
