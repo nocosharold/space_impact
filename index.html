@@ -9,24 +9,27 @@
     <title>Space Impact</title>
 </head>
 <body>
-    <main>
-        <div id="hero" style="top: 66px; left: 270px;"></div>
-        <div id="hero" class="hero_respawned" style="top: 136px; left: 270px;"></div>
-        <div id="hero_laser" style="top: 92px; left: 315px;"></div>
-        <div id="hero_laser" style="top: 92px; left: 355px;"></div>
-        <div id="hero_laser" style="top: 92px; left: 395px;"></div>
+    <div class="container">
+        <div id="hero" style="top: 300px; left: 400px;">
+            <div id="hero_laser" style="top: 25px; left: 45px;"></div>
+            <div id="hero_laser" style="top: 25px; left: 85px;"></div>
+            <div id="hero_laser" style="top: 25px; left: 125px;"></div>
+        </div>
+        <div id="hero" class="hero_respawned" style="top: 400px; left: 400px;"></div>
 
-        <div id="hero_life" style="bottom: 55px; left: 282px;"></div>
-        <div id="hero_life" style="bottom: 55px; left: 352px;"></div>
-        <div id="hero_life" style="bottom: 55px; left: 422px;"></div>
+        <div id="life_score_container">
+            <div id="hero_life"></div>
+            <div id="hero_life"></div>
+            <div id="hero_life"></div>
+            <h2>SCORE:100</h2>
+        </div>
 
-        <div id="enemy_drone" style="top: 70px; left: 1150px;"></div>
+
+        <div id="enemy_drone" style="top: 40px; left: 1152px;"></div>
         <div id="enemy_bumblebee" style="top: 150px; left: 1152px;"></div>
         <div id="boss_enemy_poseidon" style="top: 240px; left: 1152px;"></div>
         <div id="boss_enemy_valkyrie" style="top: 380px; left: 1152px;"></div>
         <div id="boss_enemy_doppelganger" style="top: 540px; left: 1152px;"></div>
-        
-        <h2>SCORE:100</h2>
-    </main>
+    </div>
 </body>
 </html>

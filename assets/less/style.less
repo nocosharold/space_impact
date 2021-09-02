@@ -4,11 +4,11 @@ body {
     font-family: 'Press Start 2P', cursive;
 }
 
-main {
+.container {
     background: url("https://ik.imagekit.io/1cqtok8fv7n/space_impact/bg_EKXHfFH7LG.png?updatedAt=1630464133237");
     border-radius: 24px;
-    height: 90vh;
-    margin: 32px auto;
+    height: 768px;
+    margin: 0px auto;
     width: 1024px;
 
     #hero,
@@ -44,19 +44,29 @@ main {
         width: 28px;
     }
 
-    #hero_life {
-        background-position: -80px -57px;
-        height: 56px;
-        transform: rotate(-90deg);
-        width: 37px;
-    }
+    #life_score_container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        left: 20px;
+        position: relative;
+        top: 698px;
+        width: 45%;
 
-    h2 {
-        bottom: 41px;
-        color: white;
-        left: 486px;
-        letter-spacing: 2px;
-        position: absolute;
+        #hero_life {
+            background-position: -80px -57px;
+            height: 56px;
+            position: relative;
+            transform: rotate(-90deg);
+            width: 37px;
+        }
+    
+        h2 {
+            bottom: 0px;
+            color: white;
+            left: 500px;
+            letter-spacing: 2px;
+        }
     }
 
     #enemy_drone {
