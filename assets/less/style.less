@@ -8,12 +8,15 @@ body {
     background: url("https://ik.imagekit.io/1cqtok8fv7n/space_impact/bg_EKXHfFH7LG.png?updatedAt=1630464133237");
     border-radius: 24px;
     height: 768px;
+    max-height: 768px;
     margin: 0px auto;
     width: 1024px;
+    max-width: 1024px;
+    margin: 0 auto;
 
     #hero,
-    #hero_laser,
-    #hero_life,
+    .laser,
+    .hero_life,
     #enemy_drone,
     #enemy_bumblebee,
     #boss_enemy_poseidon,
@@ -29,6 +32,13 @@ body {
         width: 37px;
     }
 
+    .laser {
+        background-position: -50px -430px;
+        height: 4px;
+        width: 28px;
+        top: -4px;
+    }
+
     .hero_respawned {
         border-radius: 8px;
         border: 4px solid #33b5ee;
@@ -36,12 +46,6 @@ body {
         margin: 2px;
         -moz-box-shadow: 0px 0px 8px 0px rgba(51,181,238,0.8);
         -webkit-box-shadow: 0px 0px 8px 0px rgba(51,181,238,0.8);
-    }
-    
-    #hero_laser {
-        background-position: -50px -430px;
-        height: 4px;
-        width: 28px;
     }
 
     #life_score_container {
@@ -53,7 +57,7 @@ body {
         top: 710px;
         width: 45%;
 
-        #hero_life {
+        .hero_life {
             background-position: -80px -57px;
             height: 56px;
             position: relative;

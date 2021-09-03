@@ -4,6 +4,7 @@ let hero_position = {
 }
 
 let life_remaining = 3;
+let lasers = [];
 
 /**
 *   DOCU: This function is used to move a hero space ship
@@ -11,7 +12,7 @@ let life_remaining = 3;
 *   Last updated at: September 2, 2021
 *   @author Harold
 */
-function moveHero(e){
+function controlHero(e){
     /* up arrow */
     if(e.keyCode === 38 && hero_position.y - 8 != 12) {
         hero_position.y = parseInt($("#hero").css("top"));
@@ -36,6 +37,11 @@ function moveHero(e){
         hero_position.x += 8;
         $("#hero").css({ "left": hero_position.x + "px" });
     }
+    /* shoot a laser */
+    if(e.keyCode === 32){
+        lasers.push({ x: hero_position.x - 278, y: hero_position.y + 29});
+        displayLaser();
+    }
 }
 
 /**
@@ -44,27 +50,56 @@ function moveHero(e){
 *   @author Harold
 */
 function displayLifeAndScore(){
-    
     let life_template = ``;
 
     for(let i = 0; i < life_remaining; i++){
-        life_template += `<div id="hero_life"></div>`
+        life_template += `<div class="hero_life"></div>`
     }
     life_template += `<h2>SCORE:100</h2>`
     $("#life_score_container").html(life_template);
-    console.log(life_template);
+}
+
+/**
+*   DOCU: This function is used to display laser
+* 	Triggered by space bar key
+*   Last updated at: September 3, 2021
+*   @author Harold
+*/
+function displayLaser(){
+    let laser_template = ``;
+        for(let i=0; i<lasers.length; i++){
+            laser_template += `<div class="laser" style="top:${lasers[i].y}px; left:${lasers[i].x}px;"></div>`;
+        }
+    $(".laser").html(laser_template);
+    console.log(laser_template);
+}
+
+/**
+*   DOCU: This function is used to make laser move
+* 	Triggered by gameLoop
+*   Last updated at: September 3, 2021
+*   @author Harold
+*/
+function moveLaser(){
+    for(let i=0; i<lasers.length; i++){
+        lasers[i].x += 8;
+        if(lasers[i].x > 995) {
+            lasers[i] = lasers[lasers.length - 1];
+            lasers.pop();
+        }
+    }
 }
 
 function gameLoop(){
     displayLifeAndScore();
+    displayLaser();
+    moveLaser();
 }
 
 setInterval(gameLoop, 50);
 
 $(document).keydown(function(e){
-    moveHero(e);
-    /* if(e.keyCode === 32){
-    } */
+    controlHero(e);
 });
 
 /**
