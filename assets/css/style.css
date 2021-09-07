@@ -21,11 +21,11 @@ body {
 .container #hero,
 .container .laser,
 .container .hero_life,
-.container #enemy_drone,
-.container #enemy_bumblebee,
-.container #boss_enemy_poseidon,
-.container #boss_enemy_valkyrie,
-.container #boss_enemy_doppelganger {
+.container .enemy_drone,
+.container .enemy_bumblebee,
+.container .boss_enemy_poseidon,
+.container .boss_enemy_valkyrie,
+.container .boss_enemy_doppelganger {
   background: url("https://ik.imagekit.io/1cqtok8fv7n/space_impact/sprite_QymC4kX-Y.png?updatedAt=1630480113523");
   position: absolute;
 }
@@ -70,33 +70,44 @@ body {
   left: 500px;
   letter-spacing: 2px;
 }
-.container #enemy_drone {
+.container #enemies {
+  position: absolute;
+}
+.container #enemies .enemy_drone {
   background-position: -468px -223px;
   height: 46px;
   width: 45px;
 }
-.container #enemy_bumblebee {
+.container #enemies .enemy_bumblebee {
   background-position: -85px -305px;
   height: 24px;
   width: 37px;
 }
-.container #boss_enemy_poseidon,
-.container #boss_enemy_valkyrie,
-.container #boss_enemy_doppelganger {
+.container #enemies .boss_enemy_poseidon,
+.container #enemies .boss_enemy_valkyrie,
+.container #enemies .boss_enemy_doppelganger {
+  -moz-transform: scale(2);
+  -o-transform: scale(2);
+  -webkit-transform: scale(2);
   transform: scale(2);
 }
-.container #boss_enemy_poseidon {
+.container #enemies .boss_enemy_poseidon {
   background-position: -64px -212px;
   height: 48px;
   width: 42px;
 }
-.container #boss_enemy_valkyrie {
+.container #enemies .boss_enemy_valkyrie {
   background-position: -181px -113px;
   height: 51px;
   width: 42px;
 }
-.container #boss_enemy_doppelganger {
+.container #enemies .boss_enemy_doppelganger {
   background-position: -169px -61px;
   height: 51px;
   width: 42px;
+}
+.container #enemies .collide {
+  background-position: -160px -292px;
+  height: 23px;
+  width: 22px;
 }
