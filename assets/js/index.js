@@ -81,7 +81,7 @@ function controlHero(e){
 function displayLifeAndScore() {
     let life_template = ``;
 
-    for(let i = 0; i < life_remaining; i++){
+    for(let life = 0; life < life_remaining; life++){
         life_template += `<div class="hero_life"></div>`;
     }
     life_template += `<h2>SCORE:${score}</h2>`;
@@ -96,12 +96,12 @@ function displayLifeAndScore() {
 */
 function displayHeroLaser() {
     let laser_template = ``;
-        for(let i = 0; i < lasers.length; i++){
-            lasers[i].height = 4;
-            lasers[i].width = 28;
-            laser_template += `<div class="laser" style="top:${ lasers[i].y }px; left:${ lasers[i].x }px;"></div>`;
+        for(let laser = 0; laser < lasers.length; laser++){
+            lasers[laser].height = 4;
+            lasers[laser].width = 28;
+            laser_template += `<div class="hero_laser" style="top:${ lasers[laser].y }px; left:${ lasers[laser].x }px;"></div>`;
         }
-    $(".laser").html(laser_template);
+    $(".hero_laser").html(laser_template);
 }
 
 /**
@@ -110,10 +110,10 @@ function displayHeroLaser() {
 *   @author Harold
 */
 function moveHeroLaser() {
-    for(let i = 0; i < lasers.length; i++){
-        lasers[i].x += 8;
-        if(lasers[i].x > 995) {
-            lasers[i] = lasers[lasers.length - 1];
+    for(let laser = 0; laser < lasers.length; laser++){
+        lasers[laser].x += 8;
+        if(lasers[laser].x > 988) {
+            lasers[laser] = lasers[lasers.length - 1];
             lasers.pop();
         }
     }
@@ -126,8 +126,8 @@ function moveHeroLaser() {
 */
 function displayEnemies() {
     let enemy_template = ``;
-    for(let i = 0; i < enemies.length; i++ ){
-        enemy_template += `<div class="${ enemies[i].name }" style="top:${ enemies[i].y }px; left:${ enemies[i].x }px;"></div>`;
+    for(let enemy = 0; enemy < enemies.length; enemy++ ){
+        enemy_template += `<div class="${ enemies[enemy].name }" style="top:${ enemies[enemy].y }px; left:${ enemies[enemy].x }px;"></div>`;
     }
     $("#enemies").html(enemy_template);
 }
@@ -138,30 +138,32 @@ function displayEnemies() {
 *   @author Harold
 */
 function moveEnemies() {
-    for(let i = 0; i < enemies.length; i++){
-        enemies[i].x -= 8;
-        if(enemies[i].x < 144) {
-            enemies[i].x = 1024;
-            enemies[i].y = Math.floor(Math.random() * 400);
+    for(let enemy = 0; enemy < enemies.length; enemy++){
+        enemies[enemy].x -= 8;
+        if (enemies[enemy].x < 144) {
+            enemies[enemy].x = 1024;
+            enemies[enemy].y = Math.floor(Math.random() * 400);
         }
     }
 }
 
 /**
 *   DOCU: This function is used to detect lasers and enemies collision
-*   Last updated at: September 7, 2021
+*   Last updated at: September 8, 2021
 *   @author Harold
 */
-function collisionDetection() {
-    for(let i = 0; i < lasers.length; i++){
-        for(let j = 0; j < enemies.length; j++){
-            if( lasers[i].x - enemies[j].x - enemies[j].width > -enemies[j].width &&
-                lasers[i].x - enemies[j].x - enemies[j].width < 0 &&
-                lasers[i].y - enemies[j].y - enemies[j].height > 43 &&
-                lasers[i].y - enemies[j].y - enemies[j].height < 71) {
-                    lasers.pop();
-                    $(`.${enemies[j].name}`).addClass("collide");
-                    enemies[j].y = -300;
+function heroLaserToEnemyCollider() {
+    for(let enemy = 0; enemy < enemies.length; enemy++){
+        for(let laser = 0; laser < lasers.length; laser++){
+            if (lasers[laser].x + 8 >= enemies[enemy].x &&
+                lasers[laser].x <= enemies[enemy].x &&
+                lasers[laser].y - enemies[enemy].y >= 69 &&
+                lasers[laser].y - enemies[enemy].y <= 116
+            ) {
+                lasers[laser] = lasers[lasers.length - 1];
+                $(`.${enemies[enemy].name}`).addClass("collide");
+                    lasers.pop(); 
+                    enemies[enemy].y = -300;
                     score += 10;
             }
         }
@@ -169,10 +171,10 @@ function collisionDetection() {
 }
 
 function gameLoop(){
-    collisionDetection();
-    moveEnemies();
-    displayEnemies();
+    heroLaserToEnemyCollider();
     displayLifeAndScore();
+    displayEnemies();
+    moveEnemies();
     displayHeroLaser();
     moveHeroLaser();
 }

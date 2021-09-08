@@ -19,7 +19,7 @@ body {
   margin: 0 auto;
 }
 .container #hero,
-.container .laser,
+.container .hero_laser,
 .container .hero_life,
 .container .enemy_drone,
 .container .enemy_bumblebee,
@@ -34,11 +34,12 @@ body {
   height: 56px;
   width: 37px;
 }
-.container .laser {
+.container .hero_laser {
   background-position: -50px -430px;
   height: 4px;
   width: 28px;
   top: -4px;
+  position: absolute;
 }
 .container .hero_respawned {
   border-radius: 8px;
