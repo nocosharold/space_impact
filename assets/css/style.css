@@ -11,8 +11,8 @@ body {
 .container {
   background: url("https://ik.imagekit.io/1cqtok8fv7n/space_impact/bg_EKXHfFH7LG.png?updatedAt=1630464133237");
   border-radius: 24px;
-  height: 768px;
-  max-height: 768px;
+  height: 720px;
+  max-height: 720px;
   margin: 0px auto;
   width: 1024px;
   max-width: 1024px;
@@ -20,6 +20,7 @@ body {
 }
 .container #hero,
 .container .hero_laser,
+.container .enemy_laser,
 .container .hero_life,
 .container .enemy_drone,
 .container .enemy_bumblebee,
@@ -38,8 +39,12 @@ body {
   background-position: -50px -430px;
   height: 4px;
   width: 28px;
-  top: -4px;
   position: absolute;
+}
+.container .enemy_laser {
+  background-position: -79px -430px;
+  height: 4px;
+  width: 28px;
 }
 .container .hero_respawned {
   border-radius: 8px;
@@ -55,7 +60,7 @@ body {
   justify-content: space-around;
   left: 20px;
   position: relative;
-  top: 710px;
+  top: 650px;
   width: 45%;
 }
 .container #life_score_container .hero_life {
@@ -71,43 +76,40 @@ body {
   left: 500px;
   letter-spacing: 2px;
 }
-.container #enemies {
-  position: absolute;
-}
-.container #enemies .enemy_drone {
+.container .enemy_drone {
   background-position: -468px -223px;
   height: 46px;
   width: 45px;
 }
-.container #enemies .enemy_bumblebee {
+.container .enemy_bumblebee {
   background-position: -85px -305px;
   height: 24px;
   width: 37px;
 }
-.container #enemies .boss_enemy_poseidon,
-.container #enemies .boss_enemy_valkyrie,
-.container #enemies .boss_enemy_doppelganger {
+.container .boss_enemy_poseidon,
+.container .boss_enemy_valkyrie,
+.container .boss_enemy_doppelganger {
   -moz-transform: scale(2);
   -o-transform: scale(2);
   -webkit-transform: scale(2);
   transform: scale(2);
 }
-.container #enemies .boss_enemy_poseidon {
+.container .boss_enemy_poseidon {
   background-position: -64px -212px;
   height: 48px;
   width: 42px;
 }
-.container #enemies .boss_enemy_valkyrie {
+.container .boss_enemy_valkyrie {
   background-position: -181px -113px;
   height: 51px;
   width: 42px;
 }
-.container #enemies .boss_enemy_doppelganger {
+.container .boss_enemy_doppelganger {
   background-position: -169px -61px;
   height: 51px;
   width: 42px;
 }
-.container #enemies .collide {
+.container .collide {
   background-position: -160px -292px;
   height: 23px;
   width: 22px;

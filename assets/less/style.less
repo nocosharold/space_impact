@@ -7,8 +7,8 @@ body {
 .container {
     background: url("https://ik.imagekit.io/1cqtok8fv7n/space_impact/bg_EKXHfFH7LG.png?updatedAt=1630464133237");
     border-radius: 24px;
-    height: 768px;
-    max-height: 768px;
+    height: 720px;
+    max-height: 720px;
     margin: 0px auto;
     width: 1024px;
     max-width: 1024px;
@@ -16,6 +16,7 @@ body {
 
     #hero,
     .hero_laser,
+    .enemy_laser,
     .hero_life,
     .enemy_drone,
     .enemy_bumblebee,
@@ -36,8 +37,13 @@ body {
         background-position: -50px -430px;
         height: 4px;
         width: 28px;
-        top: -4px;
         position: absolute;
+    }
+    
+    .enemy_laser {
+        background-position: -79px -430px;
+        height: 4px;
+        width: 28px;
     }
 
     .hero_respawned {
@@ -55,7 +61,7 @@ body {
         justify-content: space-around;
         left: 20px;
         position: relative;
-        top: 710px;
+        top: 650px;
         width: 45%;
 
         .hero_life {
@@ -73,56 +79,50 @@ body {
             letter-spacing: 2px;
         }
     }
-    
-    #enemies{
-        position: absolute;
 
-        .enemy_drone {
-            background-position: -468px -223px;
-            height: 46px;
-            width: 45px;
-        }
-
-        .enemy_bumblebee {
-            background-position: -85px -305px;
-            height: 24px;
-            width: 37px;
-        }
-
-        .boss_enemy_poseidon,
-        .boss_enemy_valkyrie,
-        .boss_enemy_doppelganger {
-            -moz-transform: scale(2);
-            -o-transform: scale(2);
-            -webkit-transform: scale(2);
-            transform: scale(2);
-        }
-
-        .boss_enemy_poseidon {
-            background-position: -64px -212px;
-            height: 48px;
-            width: 42px;
-        }
-
-        .boss_enemy_valkyrie {
-            background-position: -181px -113px;
-            height: 51px;
-            width: 42px;
-        }
-
-        .boss_enemy_doppelganger {
-            background-position: -169px -61px;
-            height: 51px;
-            width: 42px;
-        }
-
-        .collide {
-            background-position: -160px -292px;
-            height: 23px;
-            width: 22px;
-        }
+    .enemy_drone {
+        background-position: -468px -223px;
+        height: 46px;
+        width: 45px;
     }
-    
-    
+
+    .enemy_bumblebee {
+        background-position: -85px -305px;
+        height: 24px;
+        width: 37px;
+    }
+
+    .boss_enemy_poseidon,
+    .boss_enemy_valkyrie,
+    .boss_enemy_doppelganger {
+        -moz-transform: scale(2);
+        -o-transform: scale(2);
+        -webkit-transform: scale(2);
+        transform: scale(2);
+    }
+
+    .boss_enemy_poseidon {
+        background-position: -64px -212px;
+        height: 48px;
+        width: 42px;
+    }
+
+    .boss_enemy_valkyrie {
+        background-position: -181px -113px;
+        height: 51px;
+        width: 42px;
+    }
+
+    .boss_enemy_doppelganger {
+        background-position: -169px -61px;
+        height: 51px;
+        width: 42px;
+    }
+
+    .collide {
+        background-position: -160px -292px;
+        height: 23px;
+        width: 22px;
+    }
 }
 

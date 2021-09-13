@@ -1,11 +1,15 @@
 let hero_position = {
-    x: 480,
-    y: 300
+    height: 56,
+    width: 37,
+    x: 400,
+    y: 300,
 }
 
 let enemies = [
     { name: "enemy_drone", x: 850, y: 300, height: 46, width: 45 },
-    { name: "enemy_bumblebee", x: 1000, y: 150, height: 24, width: 37 }
+    { name: "enemy_bumblebee", x: 1000, y: 100, height: 24, width: 37 },
+    { name: "enemy_bumblebee", x: 900, y: 200, height: 24, width: 37 },
+    { name: "enemy_bumblebee", x: 800, y: 450, height: 24, width: 37 }
     /* { name: "boss_enemy_poseidon", x: 1152, y: 240, height: 96, width: 45 },
     { name: "boss_enemy_valkyrie", x: 1152, y: 380, height: 102, width: 84 },
     { name: "boss_enemy_doppelganger", x: 1152, y: 540, height: 102, width: 84 } */
@@ -14,6 +18,8 @@ let enemies = [
 let life_remaining = 3;
 let lasers = [];
 let score = 0;
+let enemy_move_speed = 2;
+let hero_move_speed = 8;
 
 /**
 *   DOCU: This function is used to move a hero space ship
@@ -23,53 +29,52 @@ let score = 0;
 */
 function controlHero(e){
     /* up arrow */
-    if(e.keyCode === 38 && hero_position.y - 8 != 12) {
+    if(e.keyCode === 38 && hero_position.y - hero_move_speed != 12) {
         hero_position.y = parseInt($("#hero").css("top"));
-        hero_position.y -= 8;
+        hero_position.y -= hero_move_speed;
         $("#hero").css({ "top": hero_position.y + "px" });
     }
-    else if(e.keyCode === 87 && hero_position.y - 8 != 12) {
+    /* w key */
+    else if(e.keyCode === 87 && hero_position.y - hero_move_speed != 12) {
         hero_position.y = parseInt($("#hero").css("top"));
-        hero_position.y -= 8;
+        hero_position.y -= hero_move_speed;
         $("#hero").css({ "top": hero_position.y + "px" });
     }
     /* down arrow */
-    else if(e.keyCode === 40 && hero_position.y - 8 != 644) {
+    else if(e.keyCode === 40 && hero_position.y - hero_move_speed != 588) {
         hero_position.y = parseInt($("#hero").css("top"));
-        hero_position.y += 8;
+        hero_position.y += hero_move_speed;
         $("#hero").css({ "top": hero_position.y + "px" });
     }
-    else if(e.keyCode === 83 && hero_position.y - 8 != 644) {
+    /* s key */
+    else if(e.keyCode === 83 && hero_position.y - hero_move_speed != 588) {
         hero_position.y = parseInt($("#hero").css("top"));
-        hero_position.y += 8;
+        hero_position.y += hero_move_speed;
         $("#hero").css({ "top": hero_position.y + "px" });
     }
     /* left arrow */
-    else if(e.keyCode === 37 && hero_position.x - 8 != 344) {
+    else if(e.keyCode === 37 && hero_position.x - hero_move_speed != 288) {
         hero_position.x = parseInt($("#hero").css("left"));
-        hero_position.x -= 8;
+        hero_position.x -= hero_move_speed;
         $("#hero").css({ "left": hero_position.x + "px" });
     }
-    else if(e.keyCode === 65 && hero_position.x - 8 != 344) {
+    /* a key */
+    else if(e.keyCode === 65 && hero_position.x - hero_move_speed != 288) {
         hero_position.x = parseInt($("#hero").css("left"));
-        hero_position.x -= 8;
+        hero_position.x -= hero_move_speed;
         $("#hero").css({ "left": hero_position.x + "px" });
     }
     /* right arrow */
-    else if(e.keyCode === 39 && hero_position.x + 8 != 888) {
+    else if(e.keyCode === 39 && hero_position.x + hero_move_speed != 888) {
         hero_position.x = parseInt($("#hero").css("left"));
-        hero_position.x += 8;
+        hero_position.x += hero_move_speed;
         $("#hero").css({ "left": hero_position.x + "px" });
     }
-    else if(e.keyCode === 68 && hero_position.x + 8 != 888) {
+    /* d key */
+    else if(e.keyCode === 68 && hero_position.x + hero_move_speed != 888) {
         hero_position.x = parseInt($("#hero").css("left"));
-        hero_position.x += 8;
+        hero_position.x += hero_move_speed;
         $("#hero").css({ "left": hero_position.x + "px" });
-    }
-    /* shoot a laser */
-    if(e.keyCode === 32){
-        lasers.push({ x: hero_position.x - 278, y: hero_position.y + 29 });
-        displayHeroLaser();
     }
 }
 
@@ -88,6 +93,14 @@ function displayLifeAndScore() {
     $("#life_score_container").html(life_template);
 }
 
+function shotLaser(e) {
+    /* shoot a laser */
+    if(e.keyCode === 32){
+        lasers.push({ x: hero_position.x + 37, y: hero_position.y + 26 });
+        displayHeroLaser();
+    }
+}
+
 /**
 *   DOCU: This function is used to display laser
 * 	Triggered by space bar key
@@ -101,7 +114,7 @@ function displayHeroLaser() {
             lasers[laser].width = 28;
             laser_template += `<div class="hero_laser" style="top:${ lasers[laser].y }px; left:${ lasers[laser].x }px;"></div>`;
         }
-    $(".hero_laser").html(laser_template);
+    $("#hero_laser").html(laser_template);
 }
 
 /**
@@ -111,7 +124,7 @@ function displayHeroLaser() {
 */
 function moveHeroLaser() {
     for(let laser = 0; laser < lasers.length; laser++){
-        lasers[laser].x += 8;
+        lasers[laser].x += enemy_move_speed;
         if(lasers[laser].x > 988) {
             lasers[laser] = lasers[lasers.length - 1];
             lasers.pop();
@@ -139,8 +152,8 @@ function displayEnemies() {
 */
 function moveEnemies() {
     for(let enemy = 0; enemy < enemies.length; enemy++){
-        enemies[enemy].x -= 8;
-        if (enemies[enemy].x < 144) {
+        enemies[enemy].x -= enemy_move_speed;
+        if (enemies[enemy].x < 288) {
             enemies[enemy].x = 1024;
             enemies[enemy].y = Math.floor(Math.random() * 400);
         }
@@ -148,41 +161,46 @@ function moveEnemies() {
 }
 
 /**
-*   DOCU: This function is used to detect lasers and enemies collision
-*   Last updated at: September 8, 2021
+*   DOCU: This function is used to detect hero lasers and enemies collision
+*   Last updated at: September 13, 2021
 *   @author Harold
 */
 function heroLaserToEnemyCollider() {
     for(let enemy = 0; enemy < enemies.length; enemy++){
         for(let laser = 0; laser < lasers.length; laser++){
-            if (lasers[laser].x + 8 >= enemies[enemy].x &&
-                lasers[laser].x <= enemies[enemy].x &&
-                lasers[laser].y - enemies[enemy].y >= 69 &&
-                lasers[laser].y - enemies[enemy].y <= 116
+            if (
+                lasers[laser].x < enemies[enemy].x + enemies[enemy].width &&
+                lasers[laser].x + lasers[laser].width - hero_move_speed > enemies[enemy].x &&
+                lasers[laser].y < enemies[enemy].y + enemies[enemy].height &&
+                lasers[laser].y + lasers[laser].height - hero_move_speed > enemies[enemy].y
             ) {
                 lasers[laser] = lasers[lasers.length - 1];
-                $(`.${enemies[enemy].name}`).addClass("collide");
-                    lasers.pop(); 
-                    enemies[enemy].y = -300;
-                    score += 10;
+                lasers.pop(); 
+                enemies[enemy].y = -300;
+                score += 10;
             }
         }
     }
 }
 
 function gameLoop(){
-    heroLaserToEnemyCollider();
     displayLifeAndScore();
     displayEnemies();
     moveEnemies();
     displayHeroLaser();
     moveHeroLaser();
+    heroLaserToEnemyCollider();
+
+    setTimeout(() => {
+        gameLoop();
+    }, 16);
 }
 
-setInterval(gameLoop, 60);
-
-$(document).keydown(function(e){
-    controlHero(e);
+$(document).ready(function(){
+    gameLoop();
+    $('body')
+        .on("keydown", function(e){ controlHero(e); })
+        .on("keyup", function(e){ shotLaser(e); })
 });
 
 /**
