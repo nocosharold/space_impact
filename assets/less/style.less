@@ -5,16 +5,26 @@ body {
 }
 
 .container {
-    background: url("https://ik.imagekit.io/1cqtok8fv7n/space_impact/bg_EKXHfFH7LG.png?updatedAt=1630464133237");
+    animation: marquee 30s infinite linear;
+    background: url("https://ik.imagekit.io/1cqtok8fv7n/space_impact/bg_EKXHfFH7LG.png?updatedAt=1630464133237") repeat;
     border-radius: 24px;
     height: 720px;
+    margin: 5% auto;
     max-height: 720px;
-    margin: 0px auto;
-    width: 1024px;
     max-width: 1024px;
-    margin: 0 auto;
     overflow: hidden;
     position: relative;
+    width: 1024px;
+
+    @keyframes marquee {
+        0% {
+            background-position: 0;
+        }
+        
+        100% {
+            background-position: -800px;
+        }
+    }
 
     #hero,
     .hero_laser,
@@ -33,6 +43,16 @@ body {
         background-position: -80px -57px;
         height: 56px;
         width: 37px;
+        #shield{
+            border-radius: 0 39px 39px 0;
+            border: 1px solid #3AB9F4;
+            border-left: 0;
+            box-shadow: #33b5ee 8px 0px 8px;
+            height: 64px;
+            margin-left: 6px;
+            margin-top: -5px;
+            width: 38px;
+        }
     }
 
     .hero_laser {

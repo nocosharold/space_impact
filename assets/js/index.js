@@ -10,6 +10,7 @@ let hero = {
     width: 37,
     x: 67,
     y: 300,
+    is_vulnerable: true
 }
 
 let enemies = [
@@ -27,6 +28,8 @@ let lasers = [];
 let score = 0;
 let enemy_move_speed = 2;
 let hero_move_speed = 8;
+let laser_speed = 2;
+let is_game_on = true;
 
 /**
 *   DOCU: This function is used to move a hero space ship
@@ -72,13 +75,13 @@ function controlHero(e){
         $("#hero").css({ "left": hero.x + "px" });
     }
     /* right arrow */
-    else if(e.keyCode === 39 && hero.x + hero_move_speed != 728) {
+    else if(e.keyCode === 39 && hero.x + hero_move_speed <= 723) {
         hero.x = parseInt($("#hero").css("left"));
         hero.x += hero_move_speed;
         $("#hero").css({ "left": hero.x + "px" });
     }
     /* d key */
-    else if(e.keyCode === 68 && hero.x + hero_move_speed != 728) {
+    else if(e.keyCode === 68 && hero.x + hero_move_speed <= 723) {
         hero.x = parseInt($("#hero").css("left"));
         hero.x += hero_move_speed;
         $("#hero").css({ "left": hero.x + "px" });
@@ -205,9 +208,10 @@ function heroLaserToEnemyCollider() {
         for(let laser = 0; laser < lasers.length; laser++){
             if (
                 lasers[laser].x < enemies[enemy].x + enemies[enemy].width &&
-                lasers[laser].x + lasers[laser].width - hero_move_speed > enemies[enemy].x &&
+                lasers[laser].x + lasers[laser].width - enemy_move_speed > enemies[enemy].x &&
                 lasers[laser].y < enemies[enemy].y + enemies[enemy].height &&
-                lasers[laser].y + lasers[laser].height - hero_move_speed > enemies[enemy].y
+                lasers[laser].y + lasers[laser].height - enemy_move_speed > enemies[enemy].y && 
+                is_game_on
             ) {
                 lasers[laser] = lasers[lasers.length - 1];
                 lasers.pop(); 
@@ -230,8 +234,8 @@ function heroToEnemyCollider() {
                 hero.x < enemies[enemy].x + enemies[enemy].width &&
                 hero.x + hero.width - hero_move_speed > enemies[enemy].x &&
                 hero.y < enemies[enemy].y + enemies[enemy].height &&
-                hero.y + hero.height - hero_move_speed > enemies[enemy].y
-                
+                hero.y + hero.height - hero_move_speed > enemies[enemy].y &&
+                hero.is_vulnerable
             ) {
                 enemies[enemy].y = -300;
                 life_remaining--;
@@ -239,18 +243,49 @@ function heroToEnemyCollider() {
                 hero.y = 300;
                 $("#hero").css({ "left": hero.x + "px" });
                 $("#hero").css({ "top": hero.y + "px" });
+                vulnerability();
             }
             if(life_remaining == 0){
                 displayLifeAndScore();
                 $(".container").children().addClass("hidden");
                 $("#game_over").removeClass("hidden");
+                is_game_on = false;
                 $(".container").stop();
             }
         }
     }
 }
 
+function vulnerability(){
+    $("#shield").removeClass("hidden");
+    hero.is_vulnerable = false;
+    
+    setTimeout(() => {
+        $("#shield").addClass("hidden");
+        hero.is_vulnerable = true;
+    }, 5000);
+}
+
+function invulnerable(){
+    for(let enemy = 0; enemy < enemies.length; enemy++){
+        for(let i = 0; i < enemies.length; i++){
+            if (
+                hero.x < enemies[enemy].x + enemies[enemy].width &&
+                hero.x + hero.width - hero_move_speed > enemies[enemy].x &&
+                hero.y < enemies[enemy].y + enemies[enemy].height &&
+                hero.y + hero.height - hero_move_speed > enemies[enemy].y &&
+                hero.is_vulnerable === false &&
+                is_game_on
+            ) {
+                enemies[enemy].y = -300;
+                score += 10;
+            }
+        }
+    }
+}
+
 function gameLoop(){
+    invulnerable();
     displayLifeAndScore();
     displayEnemies();
     moveEnemies();
@@ -270,7 +305,7 @@ function gameLoop(){
  ** Game Over when player loses all 3 lives
  ** When Player collides with an enemy or an enemy bullet, player loses one life, then respawns in the middle left side of the game screen
  * After respawning player has 5 to be invulnerable to enemies and bullets
- * While invulnerable, colliding enemies or enemy bullets get automatically destroyed
+ ** While invulnerable, colliding enemies or enemy bullets get automatically destroyed
  * Enemies and enemy bullets take damage when they collide with player bullets
  ** Bullets are destroyed when they reach the end of the game screen
  ** Spawn enemies outside the right side of the game screen
