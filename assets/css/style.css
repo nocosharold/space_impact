@@ -18,6 +18,7 @@ body {
   max-width: 1024px;
   margin: 0 auto;
   overflow: hidden;
+  position: relative;
 }
 .container #hero,
 .container .hero_laser,

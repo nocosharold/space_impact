@@ -8,7 +8,7 @@ $(document).ready(function(){
 let hero = {
     height: 56,
     width: 37,
-    x: 400,
+    x: 67,
     y: 300,
 }
 
@@ -60,25 +60,25 @@ function controlHero(e){
         $("#hero").css({ "top": hero.y + "px" });
     }
     /* left arrow */
-    else if(e.keyCode === 37 && hero.x - hero_move_speed != 288) {
+    else if(e.keyCode === 37 && hero.x - hero_move_speed >= 11) {
         hero.x = parseInt($("#hero").css("left"));
         hero.x -= hero_move_speed;
         $("#hero").css({ "left": hero.x + "px" });
     }
     /* a key */
-    else if(e.keyCode === 65 && hero.x - hero_move_speed != 288) {
+    else if(e.keyCode === 65 && hero.x - hero_move_speed >= 11) {
         hero.x = parseInt($("#hero").css("left"));
         hero.x -= hero_move_speed;
         $("#hero").css({ "left": hero.x + "px" });
     }
     /* right arrow */
-    else if(e.keyCode === 39 && hero.x + hero_move_speed != 888) {
+    else if(e.keyCode === 39 && hero.x + hero_move_speed != 728) {
         hero.x = parseInt($("#hero").css("left"));
         hero.x += hero_move_speed;
         $("#hero").css({ "left": hero.x + "px" });
     }
     /* d key */
-    else if(e.keyCode === 68 && hero.x + hero_move_speed != 888) {
+    else if(e.keyCode === 68 && hero.x + hero_move_speed != 728) {
         hero.x = parseInt($("#hero").css("left"));
         hero.x += hero_move_speed;
         $("#hero").css({ "left": hero.x + "px" });
@@ -188,7 +188,7 @@ function displayEnemies() {
 function moveEnemies() {
     for(let enemy = 0; enemy < enemies.length; enemy++){
         enemies[enemy].x -= enemy_move_speed;
-        if (enemies[enemy].x < 288) {
+        if (enemies[enemy].x < 11) {
             enemies[enemy].x = 1024;
             enemies[enemy].y = Math.floor(Math.random() * 400);
         }
@@ -235,7 +235,7 @@ function heroToEnemyCollider() {
             ) {
                 enemies[enemy].y = -300;
                 life_remaining--;
-                hero.x = 400;
+                hero.x = 67;
                 hero.y = 300;
                 $("#hero").css({ "left": hero.x + "px" });
                 $("#hero").css({ "top": hero.y + "px" });
@@ -244,7 +244,7 @@ function heroToEnemyCollider() {
                 displayLifeAndScore();
                 $(".container").children().addClass("hidden");
                 $("#game_over").removeClass("hidden");
-                $(".container").pause();
+                $(".container").stop();
             }
         }
     }
