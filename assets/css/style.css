@@ -3,7 +3,7 @@
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url(https://fonts.gstatic.com/s/pressstart2p/v9/e3t4euO8T-267oIAQAu6jDQyK0nS.ttf) format('truetype');
+  src: url(https://fonts.gstatic.com/s/pressstart2p/v12/e3t4euO8T-267oIAQAu6jDQyK0nS.ttf) format('truetype');
 }
 body {
   font-family: 'Press Start 2P', cursive;
@@ -17,6 +17,7 @@ body {
   width: 1024px;
   max-width: 1024px;
   margin: 0 auto;
+  overflow: hidden;
 }
 .container #hero,
 .container .hero_laser,
@@ -113,4 +114,12 @@ body {
   background-position: -160px -292px;
   height: 23px;
   width: 22px;
+}
+.container #game_over {
+  text-align: center;
+  margin-top: 25%;
+  color: #fff;
+}
+.hidden {
+  display: none;
 }

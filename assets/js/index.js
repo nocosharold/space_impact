@@ -1,4 +1,11 @@
-let hero_position = {
+$(document).ready(function(){
+    gameLoop();
+    $('body')
+        .on("keydown", function(e){ controlHero(e); })
+        .on("keyup", function(e){ shotLaser(e); })
+});
+
+let hero = {
     height: 56,
     width: 37,
     x: 400,
@@ -29,52 +36,52 @@ let hero_move_speed = 8;
 */
 function controlHero(e){
     /* up arrow */
-    if(e.keyCode === 38 && hero_position.y - hero_move_speed != 12) {
-        hero_position.y = parseInt($("#hero").css("top"));
-        hero_position.y -= hero_move_speed;
-        $("#hero").css({ "top": hero_position.y + "px" });
+    if(e.keyCode === 38 && hero.y - hero_move_speed != 12) {
+        hero.y = parseInt($("#hero").css("top"));
+        hero.y -= hero_move_speed;
+        $("#hero").css({ "top": hero.y + "px" });
     }
     /* w key */
-    else if(e.keyCode === 87 && hero_position.y - hero_move_speed != 12) {
-        hero_position.y = parseInt($("#hero").css("top"));
-        hero_position.y -= hero_move_speed;
-        $("#hero").css({ "top": hero_position.y + "px" });
+    else if(e.keyCode === 87 && hero.y - hero_move_speed != 12) {
+        hero.y = parseInt($("#hero").css("top"));
+        hero.y -= hero_move_speed;
+        $("#hero").css({ "top": hero.y + "px" });
     }
     /* down arrow */
-    else if(e.keyCode === 40 && hero_position.y - hero_move_speed != 588) {
-        hero_position.y = parseInt($("#hero").css("top"));
-        hero_position.y += hero_move_speed;
-        $("#hero").css({ "top": hero_position.y + "px" });
+    else if(e.keyCode === 40 && hero.y - hero_move_speed != 588) {
+        hero.y = parseInt($("#hero").css("top"));
+        hero.y += hero_move_speed;
+        $("#hero").css({ "top": hero.y + "px" });
     }
     /* s key */
-    else if(e.keyCode === 83 && hero_position.y - hero_move_speed != 588) {
-        hero_position.y = parseInt($("#hero").css("top"));
-        hero_position.y += hero_move_speed;
-        $("#hero").css({ "top": hero_position.y + "px" });
+    else if(e.keyCode === 83 && hero.y - hero_move_speed != 588) {
+        hero.y = parseInt($("#hero").css("top"));
+        hero.y += hero_move_speed;
+        $("#hero").css({ "top": hero.y + "px" });
     }
     /* left arrow */
-    else if(e.keyCode === 37 && hero_position.x - hero_move_speed != 288) {
-        hero_position.x = parseInt($("#hero").css("left"));
-        hero_position.x -= hero_move_speed;
-        $("#hero").css({ "left": hero_position.x + "px" });
+    else if(e.keyCode === 37 && hero.x - hero_move_speed != 288) {
+        hero.x = parseInt($("#hero").css("left"));
+        hero.x -= hero_move_speed;
+        $("#hero").css({ "left": hero.x + "px" });
     }
     /* a key */
-    else if(e.keyCode === 65 && hero_position.x - hero_move_speed != 288) {
-        hero_position.x = parseInt($("#hero").css("left"));
-        hero_position.x -= hero_move_speed;
-        $("#hero").css({ "left": hero_position.x + "px" });
+    else if(e.keyCode === 65 && hero.x - hero_move_speed != 288) {
+        hero.x = parseInt($("#hero").css("left"));
+        hero.x -= hero_move_speed;
+        $("#hero").css({ "left": hero.x + "px" });
     }
     /* right arrow */
-    else if(e.keyCode === 39 && hero_position.x + hero_move_speed != 888) {
-        hero_position.x = parseInt($("#hero").css("left"));
-        hero_position.x += hero_move_speed;
-        $("#hero").css({ "left": hero_position.x + "px" });
+    else if(e.keyCode === 39 && hero.x + hero_move_speed != 888) {
+        hero.x = parseInt($("#hero").css("left"));
+        hero.x += hero_move_speed;
+        $("#hero").css({ "left": hero.x + "px" });
     }
     /* d key */
-    else if(e.keyCode === 68 && hero_position.x + hero_move_speed != 888) {
-        hero_position.x = parseInt($("#hero").css("left"));
-        hero_position.x += hero_move_speed;
-        $("#hero").css({ "left": hero_position.x + "px" });
+    else if(e.keyCode === 68 && hero.x + hero_move_speed != 888) {
+        hero.x = parseInt($("#hero").css("left"));
+        hero.x += hero_move_speed;
+        $("#hero").css({ "left": hero.x + "px" });
     }
 }
 
@@ -96,7 +103,7 @@ function displayLifeAndScore() {
 function shotLaser(e) {
     /* shoot a laser */
     if(e.keyCode === 32){
-        lasers.push({ x: hero_position.x + 37, y: hero_position.y + 26 });
+        lasers.push({ x: hero.x + 37, y: hero.y + 26 });
         displayHeroLaser();
     }
 }
@@ -112,10 +119,29 @@ function displayHeroLaser() {
         for(let laser = 0; laser < lasers.length; laser++){
             lasers[laser].height = 4;
             lasers[laser].width = 28;
+            lasers[laser].name = "hero_laser";
             laser_template += `<div class="hero_laser" style="top:${ lasers[laser].y }px; left:${ lasers[laser].x }px;"></div>`;
         }
     $("#hero_laser").html(laser_template);
 }
+
+/**
+* TODO
+*   DOCU: This function is used to display laser
+* 	Triggered by space bar key
+*   Last updated at: September 14, 2021
+*   @author Harold
+*/
+/* function displayEnemyLaser() {
+    let enemy_laser_template = ``;
+        for(let enemy_laser = 0; enemy_laser < lasers.length; enemy_laser++){
+            lasers[enemy_laser].height = 4;
+            lasers[enemy_laser].width = 28;
+            lasers[enemy_laser].name = "enemy_laser";
+            enemy_laser_template += `<div class="enemy_laser" style="top:${ lasers[enemy_laser].y }px; left:${ lasers[enemy_laser].x }px;"></div>`;
+        }
+    $("#enemy_laser").html(enemy_laser_template);
+} */
 
 /**
 *   DOCU: This function is used to make hero laser move
@@ -124,10 +150,19 @@ function displayHeroLaser() {
 */
 function moveHeroLaser() {
     for(let laser = 0; laser < lasers.length; laser++){
-        lasers[laser].x += enemy_move_speed;
-        if(lasers[laser].x > 988) {
-            lasers[laser] = lasers[lasers.length - 1];
-            lasers.pop();
+        if(lasers[laser].name === "hero_laser"){
+            lasers[laser].x += enemy_move_speed;
+            if(lasers[laser].x > 988) {
+                lasers[laser] = lasers[lasers.length - 1];
+                lasers.pop();
+            }
+        }
+        else if(lasers[laser].name === "enemy_laser") {
+            if(lasers[laser].x < 288) {
+                lasers[laser].x -= enemy_move_speed;
+                lasers[laser] = lasers[lasers.length - 1];
+                lasers.pop();
+            }
         }
     }
 }
@@ -183,6 +218,38 @@ function heroLaserToEnemyCollider() {
     }
 }
 
+/**
+*   DOCU: This function is used to detect hero and enemies collision
+*   Last updated at: September 13, 2021
+*   @author Harold
+*/
+function heroToEnemyCollider() {
+    for(let enemy = 0; enemy < enemies.length; enemy++){
+        for(let i = 0; i < enemies.length; i++){
+            if (
+                hero.x < enemies[enemy].x + enemies[enemy].width &&
+                hero.x + hero.width - hero_move_speed > enemies[enemy].x &&
+                hero.y < enemies[enemy].y + enemies[enemy].height &&
+                hero.y + hero.height - hero_move_speed > enemies[enemy].y
+                
+            ) {
+                enemies[enemy].y = -300;
+                life_remaining--;
+                hero.x = 400;
+                hero.y = 300;
+                $("#hero").css({ "left": hero.x + "px" });
+                $("#hero").css({ "top": hero.y + "px" });
+            }
+            if(life_remaining == 0){
+                displayLifeAndScore();
+                $(".container").children().addClass("hidden");
+                $("#game_over").removeClass("hidden");
+                $(".container").pause();
+            }
+        }
+    }
+}
+
 function gameLoop(){
     displayLifeAndScore();
     displayEnemies();
@@ -190,22 +257,18 @@ function gameLoop(){
     displayHeroLaser();
     moveHeroLaser();
     heroLaserToEnemyCollider();
+    heroToEnemyCollider();
 
     setTimeout(() => {
         gameLoop();
     }, 16);
 }
 
-$(document).ready(function(){
-    gameLoop();
-    $('body')
-        .on("keydown", function(e){ controlHero(e); })
-        .on("keyup", function(e){ shotLaser(e); })
-});
+
 
 /**
- * Game Over when player loses all 3 lives
- * When Player collides with an enemy or an enemy bullet, player loses one life, then respawns in the middle left side of the game screen
+ ** Game Over when player loses all 3 lives
+ ** When Player collides with an enemy or an enemy bullet, player loses one life, then respawns in the middle left side of the game screen
  * After respawning player has 5 to be invulnerable to enemies and bullets
  * While invulnerable, colliding enemies or enemy bullets get automatically destroyed
  * Enemies and enemy bullets take damage when they collide with player bullets
